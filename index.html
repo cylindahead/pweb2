@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>cylindahead</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 15px;
+  background: #0000aa;
+  color: #e0e0ff;
+  line-height: 1.75;
+}
+
+/* ── outer wrapper: full width blue ── */
+#outer {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* ── inner: max-width, white centre, blue sides ── */
+#inner {
+  display: flex;
+  width: 100%;
+  max-width: 1100px;
+}
+
+/* ── left sidebar ── */
+#nav {
+  width: 190px;
+  min-width: 190px;
+  flex-shrink: 0;
+  padding: 20px 14px 20px 14px;
+  font-size: 13px;
+  line-height: 2;
+  /* sits on the blue */
+}
+
+#nav a { display: block; color: #ffff88; padding: 1px 0; text-decoration: none; }
+#nav a:visited { color: #ccccff; }
+#nav a:hover { color: #ffffff; text-decoration: underline; }
+
+.nav-label {
+  display: inline-block;
+  background: #aaaaaa;
+  color: #0000aa;
+  padding: 1px 8px;
+  font-weight: bold;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+img.photo {
+  width: 150px;
+  margin: 10px 0 6px 0;
+  display: block;
+  border: 1px solid #4444cc;
+}
+
+.currently { font-size: 12px; line-height: 1.9; margin-top: 4px; color: #e0e0ff; }
+.currently li { list-style: none; padding-left: 1em; position: relative; margin-bottom: 0.2em; }
+.currently li::before { content: ">"; position: absolute; left: 0; color: #8888ff; }
+.currently i { color: #aaaaff; font-style: italic; }
+
+/* ── centre content: white box ── */
+#content {
+  flex: 1;
+  background: #ffffff;
+  color: #000000;
+  padding: 24px 32px 48px 32px;
+  border-left: 3px solid #0000cc;
+  border-right: 3px solid #0000cc;
+}
+
+#content a { color: #0000cc; }
+#content a:visited { color: #551a8b; }
+#content a:hover { text-decoration: underline; }
+
+#content h1 {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 0.8em;
+  font-family: "Courier New", Courier, monospace;
+}
+
+#content h2 {
+  font-size: 0.95em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 1.8em;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid #cccccc;
+  padding-bottom: 3px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+#content hr {
+  border: none;
+  border-top: 1px solid #dddddd;
+  margin: 1.4em 0;
+}
+
+#content p {
+  margin-bottom: 1em;
+  max-width: 620px;
+  color: #111111;
+}
+
+#content ul {
+  list-style: none;
+  margin: 0.4em 0 0.8em 0;
+  padding: 0;
+}
+
+#content li {
+  margin-bottom: 0.9em;
+  padding-left: 1.4em;
+  position: relative;
+  max-width: 620px;
+  color: #111111;
+}
+
+#content li::before {
+  content: ">";
+  position: absolute;
+  left: 0;
+  color: #0000aa;
+}
+
+#content b { color: #000000; }
+#content i { color: #444444; font-style: italic; }
+
+#content code {
+  background: #f0f0f0;
+  color: #000000;
+  padding: 1px 5px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.93em;
+  border: 1px solid #cccccc;
+}
+
+.footer {
+  font-size: 12px;
+  color: #888888;
+  margin-top: 2.5em;
+  border-top: 1px solid #dddddd;
+  padding-top: 0.8em;
+}
+
+.blink { animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ── right gutter: blue ── */
+#gutter { width: 190px; min-width: 190px; flex-shrink: 0; }
+
+@media (max-width: 700px) {
+  #inner { flex-direction: column; }
+  #nav { width: 100%; }
+  #gutter { display: none; }
+  #content { border: none; }
+}
+</style>
+</head>
+<body>
+<div id="outer">
+<div id="inner">
+
+  <!-- LEFT SIDEBAR -->
+  <div id="nav">
+    <span class="nav-label">CYLINDAHEAD</span><br>
+    <br>
+    <a href="#about">Homepage</a>
+    <a href="#systems">Systems / C</a>
+    <a href="#kernel">Linux Kernel</a>
+    <a href="#opensource">Open Source</a>
+    <a href="#hardware">Hardware</a>
+    <a href="#cyberdeck">Cyberdecks</a>
+    <a href="#gaming">Gaming</a>
+    <a href="#vinyl">Vinyl &amp; Deep House</a>
+    <a href="#links">Links</a>
+    <br>
+    <a href="https://github.com/cylindahead" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/yourhandle" target="_blank">LinkedIn</a>
+    <br>
+
+    <img src="https://placehold.co/150x170/000088/aaaaff?text=Katlego" alt="Katlego" class="photo" />
+    <br>
+
+    <span class="nav-label">NOW</span>
+    <ul class="currently">
+      <li>Reading:<br>&nbsp;<i>Linux Kernel Dev</i><br>&nbsp;<i>Robert Love</i></li>
+      <li>Playing: Holstin / MW2</li>
+      <li>Learning: Strudel</li>
+      <li>Digging: Jazzman's</li>
+      <li>Building: home lab</li>
+    </ul>
+  </div>
+
+  <!-- CENTRE CONTENT -->
+  <div id="content">
+
+    <h1 id="about">cylindahead's Homepage</h1>
+
+    <p>
+      Hi. I'm Katlego, based in Stellenbosch, South Africa.
+      This is my personal site &mdash; no algorithm, no feed, no metrics.
+      Just the things I'm actually spending time on: low-level systems programming in C,
+      Linux kernel internals, building hardware, cyberdecks, gaming, and deep house on vinyl.
+    </p>
+
+    <p>
+      This page lists everything:
+      <a href="#systems">Systems / C</a>,
+      <a href="#kernel">Linux Kernel</a>,
+      <a href="#opensource">Open Source</a>,
+      <a href="#hardware">Hardware</a>,
+      <a href="#cyberdeck">Cyberdecks</a>,
+      <a href="#gaming">Gaming</a>,
+      <a href="#vinyl">Vinyl &amp; Deep House</a>.
+    </p>
+
+    <hr />
+
+    <h2 id="systems">Low-Level Systems Programming &mdash; C</h2>
+
+    <p>
+      I got into C through the kernel. You can't seriously study Linux internals without
+      reading C, and once you start reading it seriously you realise it's not the hostile,
+      arcane thing its reputation suggests. It's a small language. The complexity isn't
+      in the language &mdash; it's in what the language lets you get close to.
+      Memory, pointers, the actual layout of data in physical RAM.
+      That closeness is what makes it interesting.
+    </p>
+
+    <ul>
+      <li><b>Why C specifically.</b>
+      Higher-level languages give you abstractions that are useful for building things fast.
+      C gives you almost none, which means you have to build your own and understand what's
+      underneath them. When you write a struct in C, that struct is literally just bytes at
+      an offset. When you dereference a pointer, something is actually happening in memory.
+      You can't wave your hands at any of it. That discipline makes you better at every
+      other language because you stop taking the abstractions for granted.</li>
+
+      <li><b>What I'm working through.</b>
+      Kernel source reading is the main thing &mdash; <code>mm/</code> and <code>fs/</code>
+      mostly. Outside of that: a memory allocator, a simple ring buffer, a basic parser
+      that handles its own memory. Nothing impressive. The point is to write C in
+      situations where the decisions matter and you can't delegate them to a library.</li>
+
+      <li><b>Pointers are not complicated.</b>
+      They have a reputation they don't deserve. A pointer is a number. That number is
+      a memory address. Dereferencing it means "go to that address and read what's there."
+      The problems people have with pointers aren't about pointers &mdash; they're about
+      not having a clear mental model of what their program's memory looks like at any
+      given moment. Build that model and pointers follow naturally.</li>
+
+      <li><b>Memory management.</b>
+      Manual memory management is where C programmers get things wrong most often.
+      Not because the concept is hard &mdash; allocate, use, free &mdash; but because
+      in a real program the distance between allocation and free is large, and anything
+      that touches that memory in between is an opportunity for a bug. Reading how the
+      kernel handles this &mdash; the slab allocator, RCU for read-heavy data structures,
+      careful ownership at every step &mdash; is the best education on the problem I've found.
+      The kernel cannot afford a garbage collector. It has developed extremely precise
+      discipline instead.</li>
+
+      <li><b>Tools that matter.</b>
+      <code>valgrind</code> for memory errors. <code>gdb</code> for understanding what
+      is actually happening at runtime. <code>strace</code> for watching how your program
+      talks to the kernel. <code>perf</code> for profiling. The C tooling is old, stable,
+      and very good. Most people don't use it enough.</li>
+    </ul>
+
+    <hr />
+
+    <h2 id="kernel">Linux Kernel Development</h2>
+
+    <p>
+      The kernel is the most consequential piece of software most people will never think
+      about. It runs on everything. It's all readable. You can clone the entire history
+      right now. That combination &mdash; massive consequence, total transparency &mdash;
+      is rare and worth taking seriously.
+    </p>
+
+    <ul>
+      <li><b>It's not written the way I expected.</b>
+      I expected dense, impenetrable expert-only code. What I found was C that reads
+      almost like documentation if you give it time. The comments are often better than
+      those in professional codebases I've worked in. The people who wrote this
+      <i>wanted</i> it to be understood &mdash; because they needed others to review it,
+      maintain it, and fix it after they moved on.</li>
+
+      <li><b>The OOM killer has opinions.</b>
+      The out-of-memory killer decides which process to kill when memory runs out and
+      can't continue. I expected: kill the biggest process. What I found in
+      <code>mm/oom_kill.c</code> scores processes on size, runtime, lineage,
+      the <code>oom_score_adj</code> knob, and whether killing them would free enough
+      memory to matter. It has a concept of "badness." It logs extensively before it acts.</li>
+
+      <li><b>VFS is one of the best abstractions I've seen.</b>
+      A network socket, a pipe, a device, a regular file &mdash; all expose the same
+      interface because they all implement the same <code>file_operations</code> struct.
+      The kernel doesn't care what's underneath. That abstraction is why you can pipe
+      sensor output into a file the same way you'd pipe text.</li>
+
+      <li><b>Build setup.</b>
+      Debian host, QEMU guest, minimal config from <code>make localmodconfig</code>.
+      Change something, compile, boot the guest, see what happens. If the guest panics
+      I delete it. Never test kernel changes on a machine you need.</li>
+
+      <li><b>The goal.</b>
+      Get a patch accepted upstream. It will be small &mdash; a documentation fix, a
+      <code>checkpatch.pl</code> cleanup, a missing error check. The size isn't the point.
+      Learning the submission process is: <code>git format-patch</code>,
+      <code>scripts/get_maintainer.pl</code>, sending to the right list, responding to review.
+      That's the actual skill.</li>
+    </ul>
+
+    <hr />
+
+    <h2 id="opensource">Open Source</h2>
+
+    <ul>
+      <li><b>What changed my mind about contributing.</b>
+      Reading through the commit history of a project I use constantly, I found a commit
+      that fixed a bug I had hit myself and worked around with a hack. The author had two
+      commits to their name total. One of them made my life measurably better.
+      I deleted my hack that same evening.</li>
+
+      <li><b>How I approach a new codebase.</b>
+      Read the git log before the issues. Not the full history &mdash; enough to see what
+      kinds of changes get made, who makes them, what the commit style is, how maintainers
+      give feedback. Most first contributions get rejected not because the code is wrong
+      but because the contributor skipped this step.</li>
+
+      <li><b>Why I keep configs public.</b>
+      Writing something as if someone else might read it produces better output than
+      writing purely for yourself. Private repos invite sloppiness you spend twice as
+      long untangling later.</li>
+
+      <li><b>What I'm watching.</b>
+      <a href="https://github.com/iovisor/bcc" target="_blank">bcc</a> and
+      <a href="https://github.com/iovisor/bpftrace" target="_blank">bpftrace</a>
+      for eBPF tooling. A handful of security and data engineering projects I use
+      regularly and might eventually have something useful to add to.</li>
+    </ul>
+
+    <hr />
+
+    <h2 id="hardware">Hardware &amp; PC Building</h2>
+
+    <ul>
+      <li><b>Current setup.</b>
+      Dell Inspiron 14 5410 2-in-1 running Debian stable. Not exciting hardware but
+      completely reliable, which matters more. KVM/QEMU for a Kali VM and a Windows VM.
+      External SSD handles the VM images. The real bottleneck is 16GB of RAM shared
+      across everything. I am always running too many VMs.</li>
+
+      <li><b>The PS3 situation.</b>
+      I still have a PS3. The Cell processor was a strange and ambitious design &mdash;
+      seven Synergistic Processing Elements alongside a PowerPC core, built for parallel
+      floating-point workloads. Two directions I'm considering: jailbreak it with custom
+      firmware and use it as a retro gaming box, or strip the board and build a PC inside
+      the PS3 chassis. The case has deliberate airflow and the dimensions could fit a
+      small ITX board. The jailbreak is the easier path. The chassis build is
+      the more interesting one. I'll probably end up doing both on separate machines.</li>
+
+      <li><b>The home lab I'm planning.</b>
+      A tower that runs 24/7 without noise or stupid power draw, with enough RAM to stop
+      rationing VMs. Second-gen Ryzen Threadripper workstation platforms on the used market
+      for the PCIe lane count. ECC RAM mandatory &mdash; non-ECC on a machine that runs
+      continuously is a bet you will eventually lose.</li>
+
+      <li><b>What building teaches you.</b>
+      Specs lie. The bottleneck is almost always somewhere you didn't look first.
+      Cooling is almost always the real constraint. This is also true of software.
+      Hardware just makes it visceral because the wrong answer produces heat you can feel.</li>
+    </ul>
+
+    <hr />
+
+    <h2 id="cyberdeck">Cyberdecks</h2>
+
+    <p>
+      A cyberdeck is a handmade portable computer. The form factor is whatever the builder
+      decides. The enclosure is custom. The OS is Linux. The point is that it is
+      <i>yours</i> in a way no off-the-shelf laptop can be. I found this community through
+      <a href="https://www.youtube.com/@ubeBoobey" target="_blank">Ube Boobey on YouTube</a>
+      &mdash; her builds are what made me take this seriously as something I could actually
+      do rather than just admire. The way she documents the process, including the parts
+      that don't work and the redesigns, is more useful than any polished build guide.
+    </p>
+
+    <ul>
+      <li><b>The build I want to make.</b>
+      Portable Linux terminal. Raspberry Pi 5, 7-inch 1080p display angled for lap use,
+      custom 40% mechanical keyboard PCB with hot-swap sockets and USB-C output,
+      PETG printed frame with acrylic panels, 10,000mAh battery for four hours minimum.
+      Weight target under 900 grams. Folds shut so the keyboard protects the display.
+      Software: minimal Debian, no desktop environment, tmux, neovim.
+      A machine for one thing. Constraints are features.</li>
+
+      <li><b>The keyboard problem.</b>
+      Getting a proper mechanical keyboard into a cyberdeck form factor cleanly means
+      designing a custom PCB. That means learning KiCad properly, which I haven't done yet.
+      KiCad is the long lead-time item on this entire project. Everything else I can
+      figure out as I go.</li>
+
+      <li><b>Why not just use a laptop.</b>
+      A laptop is optimised for the average user doing average tasks. The cyberdeck is
+      a machine with no compromises in the directions I care about and zero concern for
+      the ones I don't. That trade-off is the point, not a limitation.</li>
+
+      <li><b>Community.</b>
+      <a href="https://www.reddit.com/r/cyberDeck/" target="_blank">r/cyberDeck</a> has
+      hundreds of documented builds. The ones worth studying are not the most visually
+      striking &mdash; they're the ones where the design decisions are clearly functional.
+      Aesthetic without function is cosplay.</li>
+    </ul>
+
+    <hr />
+
+    <h2 id="gaming">Gaming</h2>
+
+    <ul>
+      <li><b>Holstin.</b>
+      A Polish survival horror game with fixed camera angles and a visual style that leans
+      into body horror deliberately rather than gratuitously. The atmosphere is genuinely
+      oppressive. What I find interesting about it is that the controls and camera are
+      part of the design &mdash; they make you feel as vulnerable as the protagonist is
+      supposed to be. That's not a flaw, it's the point. Not many games are willing to
+      use the interface itself as part of the horror.</li>
+
+      <li><b>Call of Duty: Modern Warfare 2.</b>
+      The opposite end of the spectrum from Holstin and I don't feel the need to justify
+      playing both. The multiplayer is fast, the gunplay is tight, and there's something
+      satisfying about a game that is extremely good at one narrow thing and doesn't
+      pretend to be anything else. The map design in MW2 is studied seriously by people
+      who design competitive multiplayer games. Favela, Terminal, Highrise &mdash; these
+      maps have been analysed the way architectural layouts get analysed. Three-lane
+      structure, sightline control, choke points. There is more design intelligence
+      in a COD map than most people give it credit for.</li>
+
+      <li><b>The PS3 and what I want to do with it.</b>
+      See the hardware section. Short version: jailbreak for the full library, or build
+      a PC inside the chassis. Probably both, on separate machines.</li>
+
+      <li><b>Gaming on Linux.</b>
+      Proton has made this genuinely viable. Most things run. Some run better than on
+      Windows. When something breaks it's annoying and always educational &mdash; you
+      end up understanding what DXVK is, how Vulkan translation layers work, how the
+      Windows API maps to Linux syscalls. More than you wanted to know. Worth knowing anyway.</li>
+
+      <li><b>Emulation.</b>
+      RPCS3 emulating the Cell processor required reverse-engineering an architecture
+      Sony and IBM designed to be hard to compete with. The team did it anyway, in spare
+      time, for free. That kind of stubborn technical project is genuinely inspiring
+      independent of whether you use the result.</li>
+    </ul>
+
+    <hr />
+
+    <h2 id="vinyl">Vinyl &amp; Deep House</h2>
+
+    <p>
+      My main reference point right now is
+      <a href="https://www.nts.live/shows/jazzman" target="_blank">Jazzman's Deep Inspiration Show</a>
+      on NTS Radio. It's a show where you don't know what you're going to hear and that's
+      the whole point. The selections move between deep house, jazz-influenced electronic
+      music, soul, and things that don't fit neatly into any category. What connects them
+      is a mood &mdash; patient, textured, music that takes up space without demanding
+      attention. I've found more music through that show than through any algorithm.
+      That's not a coincidence. A human with taste surfaces things that recommendation
+      systems don't reach.
+    </p>
+
+    <ul>
+      <li><b>Why vinyl.</b>
+      A record requires a decision. You pick something, take it out, put it on, commit
+      to a side. You can't shuffle. When it ends you have to get up. That friction is
+      doing work. Removing friction from music consumption produced a world where people
+      have access to everything and listen carefully to almost nothing. I'd rather own
+      fifty records I know deeply than have access to fifty million I've scrolled past.</li>
+
+      <li><b>Learning to DJ with Strudel.</b>
+      <a href="https://strudel.cc" target="_blank">Strudel</a> is a live coding
+      environment for music built in JavaScript that runs in the browser. You write
+      patterns in a mini-language and they play in real time &mdash; change the code,
+      the music changes immediately. It's the most direct connection I've found between
+      programming and music. The feedback loop is tight enough that it feels more like
+      programming than music practice, which is probably why it's working for me.
+      I'm using it to understand how rhythm and structure work in electronic music from
+      the inside &mdash; not by listening and analysing, but by building patterns and
+      hearing immediately what works and what doesn't. If you write code and want to
+      understand music better, this is the entry point I'd recommend.</li>
+
+      <li><b>What deep house actually sounds like.</b>
+      Slower than you think &mdash; 118 to 124 BPM. Chord progressions from jazz and
+      gospel that don't resolve where pop music expects them to. Space in the mix.
+      A bassline that is melodic rather than purely rhythmic. The feeling it produces
+      at the right volume on a good sound system does not translate to phone speakers.
+      It requires some investment of attention to give back what it has.</li>
+
+      <li><b>Where to start.</b>
+      Jazzman's Deep Inspiration Show on NTS is the answer to this question &mdash;
+      a better introduction than any playlist because it comes with a selector who knows
+      why each record is there. For the originals: Larry Heard as Mr. Fingers is the
+      beginning of the thread. Follow that to early Trax Records and DJ International
+      out of Chicago. Discogs is the only reliable database for tracking down older pressings.</li>
+    </ul>
+
+    <hr />
+
+    <h2 id="links">Links</h2>
+
+    <ul>
+      <li><a href="https://www.youtube.com/@ubeBoobey" target="_blank">Ube Boobey (YouTube)</a> &mdash; the cyberdeck channel that put me on</li>
+      <li><a href="https://strudel.cc" target="_blank">strudel.cc</a> &mdash; live coding music in JavaScript, runs in the browser</li>
+      <li><a href="https://www.nts.live/shows/jazzman" target="_blank">Jazzman's Deep Inspiration Show (NTS)</a> &mdash; the show</li>
+      <li><a href="https://kernelnewbies.org" target="_blank">kernelnewbies.org</a> &mdash; how to contribute to the kernel</li>
+      <li><a href="https://lwn.net" target="_blank">LWN.net</a> &mdash; serious kernel and open source coverage</li>
+      <li><a href="https://lore.kernel.org" target="_blank">lore.kernel.org</a> &mdash; kernel mailing list archive</li>
+      <li><a href="https://www.protondb.com" target="_blank">protondb.com</a> &mdash; Linux game compatibility reports</li>
+      <li><a href="https://www.reddit.com/r/cyberDeck/" target="_blank">r/cyberDeck</a> &mdash; cyberdeck build community</li>
+      <li><a href="https://www.discogs.com" target="_blank">Discogs</a> &mdash; vinyl database and marketplace</li>
+      <li><a href="https://github.com/cylindahead" target="_blank">github.com/cylindahead</a> &mdash; my code</li>
+    </ul>
+
+    <p class="footer">
+      Katlego (cylindahead) &mdash; Stellenbosch, South Africa <span class="blink">_</span>
+    </p>
+
+  </div>
+  <!-- RIGHT GUTTER (blue) -->
+  <div id="gutter"></div>
+
+</div>
+</div>
+</body>
+</html>
